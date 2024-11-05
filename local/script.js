@@ -1,11 +1,11 @@
-//NOTE: must run chrome with this command: 
+//NOTE: must run chrome with this command:
 //open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
 //otherwise you cannot access svg through html due to CORS issue (cross origin)
 //this should stop being a problem once this is hosted on a web server (even a local server should work)
 
-// next steps: 
+// next steps:
 
-// slideshow of versions 
+// slideshow of versions
 
 // check hosted, local version of hosted, and mobile version of hosted for bugs
 
@@ -13,7 +13,7 @@
 
 // make svg responsive to window size
 
-// State abbreviations + DC 
+// State abbreviations + DC
 var statesArray = ["AK", "HI", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY", "DC2"];
 // see commented block at line 127
 var floatingStates = ["MA", "CT", "RI", "NJ", "DE", "MD", "DC2"];
@@ -48,16 +48,16 @@ function initAll(){
   var demSum = 0;
   var repSum = 0;
   var leanRepSum = 0;
-  var likRepSum = 0; 
+  var likRepSum = 0;
   var solRepSum = 0;
   var tossupSum = 0;
-  var leanDemSum = 0; 
-  var likDemSum = 0; 
+  var leanDemSum = 0;
+  var likDemSum = 0;
   var solDemSum = 0;
 
   statesArray.forEach(function(state){
     var currState = objDoc.getElementById(state);
-    var myNewDiv = document.createElement('div')  
+    var myNewDiv = document.createElement('div')
     var foreignObject = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
     var body = document.createElement('body'); // you cannot create bodies with .append("<body />") for some reason
     var statePath = svg.querySelector("#" + state);
@@ -66,22 +66,22 @@ function initAll(){
     var voteCount = parseInt($(currState).data('other'), 10);
 
     // TODO - get rid of redundant code
-    if (initialColor == "likely_r"){ // Likely R 
+    if (initialColor == "likely_r"){ // Likely R
       repSum += voteCount;
       likRepSum += voteCount;
-    } else if (initialColor == "safe_r"){ // Safe R  
+    } else if (initialColor == "safe_r"){ // Safe R
       repSum += voteCount;
       solRepSum += voteCount;
-    } else if (initialColor == "safe_d"){ // Safe D 
+    } else if (initialColor == "safe_d"){ // Safe D
       demSum += voteCount;
       solDemSum += voteCount;
-    } else if (initialColor == "likely_d"){ // Likely D 
+    } else if (initialColor == "likely_d"){ // Likely D
       demSum += voteCount;
       likDemSum += voteCount;
-    } else if (initialColor == "lean_d"){ // Lean D 
+    } else if (initialColor == "lean_d"){ // Lean D
       demSum += voteCount;
       leanDemSum += voteCount;
-    } else if (initialColor == "lean_r"){ // Lean R 
+    } else if (initialColor == "lean_r"){ // Lean R
       repSum += voteCount;
       leanRepSum += voteCount;
     } else {
@@ -112,13 +112,13 @@ function initAll(){
     $(solDemBar).css("width", solDemPercentage.toFixed(2) + "%");
     $(tossupBar).css("width", tossupPercentage.toFixed(2) + "%");
 
-    $(leanRepBar).html(leanRepSum);  
-    $(likRepBar).html(likRepSum);  
-    $(solRepBar).html(solRepSum);  
-    $(leanDemBar).html(leanDemSum);  
-    $(likDemBar).html(likDemSum);  
-    $(solDemBar).html(solDemSum);  
-    $(tossupBar).html(tossupSum);  
+    $(leanRepBar).html(leanRepSum);
+    $(likRepBar).html(likRepSum);
+    $(solRepBar).html(solRepSum);
+    $(leanDemBar).html(leanDemSum);
+    $(likDemBar).html(likDemSum);
+    $(solDemBar).html(solDemSum);
+    $(tossupBar).html(tossupSum);
     d3.select(currState).style('fill', colorsArray[initialColor]);
     var element = d3.select(currState).node();
     var bbox = element.getBBox();
@@ -168,7 +168,7 @@ function initAll(){
     solRepSumObj = document.getElementById("solRepSum");
     tossupObj = document.getElementById("tossup");
 
-    // TODO: clean this up  
+    // TODO: clean this up
     // should implement shared function for this and init too with counting EVs
     // dash case for IDs
     if (tinycolor.equals(currStateColor, "rgb(255, 88, 101)")){ // Likely R --> Safe R
@@ -180,9 +180,9 @@ function initAll(){
       solRepSumObj.innerHTML = "<div id=\"solRepSum\">solid GOP: " + solRepSum + "</div>";
 
       barAction();
-    } 
+    }
 
-    else if (tinycolor.equals(currStateColor, "rgb(210, 37, 50)")){ // Safe R --> Safe D 
+    else if (tinycolor.equals(currStateColor, "rgb(210, 37, 50)")){ // Safe R --> Safe D
       this.style.fill = "#244999";
 
       repSum -= parseInt(this.getAttribute('data-other'));
@@ -196,9 +196,9 @@ function initAll(){
 
       demSumObj.textContent = "DEM: " + demSum;
       solDemSumObj.innerHTML = "<div id=\"solDemSum\">solid DEM: " + solDemSum + "</div>";
-      
+
       barAction();
-    } 
+    }
 
     else if (tinycolor.equals(currStateColor, "rgb(36, 73, 153)")){ // Safe D --> Likely D
       this.style.fill = "#577CCC";
@@ -208,7 +208,7 @@ function initAll(){
       likDemSumObj.innerHTML = "<div id=\"likDemSum\">likely DEM: " + likDemSum + "</div>";
 
       barAction();
-    } 
+    }
 
     else if (tinycolor.equals(currStateColor, "rgb(87, 124, 204)")){ // Likely D --> Lean D
       this.style.fill = "#8AAFFF";
@@ -218,7 +218,7 @@ function initAll(){
       leanDemSum += parseInt(this.getAttribute('data-other'));
       leanDemSumObj.innerHTML = "<div id=\"leanDemSum\">lean DEM: " + leanDemSum + "</div>";
       barAction();
-    } 
+    }
 
     else if (tinycolor.equals(currStateColor, "rgb(138, 175, 255)")){ // Lean D --> Tossup
       this.style.fill = "#9E8767";
@@ -231,7 +231,7 @@ function initAll(){
       leanDemSum -= parseInt(this.getAttribute('data-other'));
       leanDemSumObj.innerHTML = "<div id=\"leanDemSum\">lean DEM: " + leanDemSum + "</div>";
       barAction();
-    } 
+    }
 
     else if (tinycolor.equals(currStateColor, "rgb(158, 135, 103)")){ // Tossup --> Lean R
       this.style.fill = "#FF8B98";
@@ -245,7 +245,7 @@ function initAll(){
       leanRepSumObj.innerHTML = "<div id=\"leanRepSum\">lean GOP: " + leanRepSum + "</div>";
       barAction();
 
-    } 
+    }
 
     else if (tinycolor.equals(currStateColor, "rgb(255, 139, 152)")){ // Lean R --> Likely R
       this.style.fill = "#FF5865";
@@ -257,14 +257,14 @@ function initAll(){
       likRepSumObj.innerHTML = "<div id=\"likRepSum\">likely GOP: " + likRepSum + "</div>";
 
       barAction();
-    } 
+    }
 
     if(demSum >= 270){
-      subtitle[0].childNodes[0].textContent = "Democrat Wins!!!";
+      subtitle[0].childNodes[0].textContent = "Democrats Win";
       $(subtitle).css("color", "blue");
     }
     else if (repSum >= 270){
-      subtitle[0].childNodes[0].textContent = "Republican Wins =(";
+      subtitle[0].childNodes[0].textContent = "Republicans Win";
       $(subtitle).css("color", "red");
     }
     else {
@@ -339,12 +339,12 @@ if (tossupPercentage > 0) {
   $(tossupBar).hide();
 }
 
-$(leanRepBar).html(leanRepSum);  
-$(likRepBar).html(likRepSum);  
-$(solRepBar).html(solRepSum);  
-$(leanDemBar).html(leanDemSum);  
-$(likDemBar).html(likDemSum);  
-$(solDemBar).html(solDemSum);  
-$(tossupBar).html(tossupSum);  
+$(leanRepBar).html(leanRepSum);
+$(likRepBar).html(likRepSum);
+$(solRepBar).html(solRepSum);
+$(leanDemBar).html(leanDemSum);
+$(likDemBar).html(likDemSum);
+$(solDemBar).html(solDemSum);
+$(tossupBar).html(tossupSum);
 }
 }
