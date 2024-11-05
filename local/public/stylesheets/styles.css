@@ -1,3 +1,6 @@
+body {
+  font-family: sans-serif;
+}
 
 h1 {
   font-size: 48px;
@@ -112,49 +115,49 @@ h1 {
   }
 
 .lean-dem-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #8AAFFF;
   height: 20px;
   display: table-cell;
 }
 
 .lik-dem-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #577CCC;
   height: 20px;
   display: table-cell;
 }
 
 .sol-dem-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #244999;
   height: 20px;
   display: table-cell;
 }
 
  .lean-rep-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #FF8B98;
   height: 20px;
   display: table-cell;
 }
 
 .lik-rep-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #FF5865;
   height: 20px;
   display: table-cell;
 }
 
 .sol-rep-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #D22532;
   height: 20px;
   display: table-cell;
 }
 
 .tossup-bar {
-  width: 15%; 
+  width: 15%;
   background-color: #9E8767;
   height: 20px;
   display: table-cell;
